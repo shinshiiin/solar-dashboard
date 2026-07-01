@@ -1,7 +1,7 @@
 import { Redis } from '@upstash/redis';
 import { NextResponse } from 'next/server';
 
-export const dynamic = 'force-dynamic'; // <-- add this
+export const dynamic = 'force-dynamic';
 
 const redis = Redis.fromEnv();
 
@@ -14,7 +14,7 @@ export async function GET() {
   }
 
   return NextResponse.json({
-    packs: JSON.parse(data),
+    packs: data,           // <-- was JSON.parse(data)
     ageMs: Date.now() - Number(timestamp)
   });
 }
