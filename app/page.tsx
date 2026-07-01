@@ -9,6 +9,7 @@ interface Pack {
   totalVoltage?: number;
   current?: number;
   soc?: number;
+  remainingAh?: number;
   maxCell?: number;
   minCell?: number;
   deltaCell?: number;
@@ -23,7 +24,7 @@ interface Pack {
 const MOCK_DATA: Pack[] = [
   {
     name: "Pack 1", connected: true, valid: true,
-    totalVoltage: 52.8, current: 12.4, soc: 87,
+    totalVoltage: 52.8, current: 12.4, soc: 87, remainingAh: 87.0,
     maxCell: 3.312, minCell: 3.298, deltaCell: 0.014,
     cycles: 142, chargeMos: true, dischargeMos: true, ageMs: 1400,
     cells: [3.301,3.305,3.298,3.310,3.312,3.303,3.307,3.299,3.306,3.304,3.308,3.302,3.309,3.300,3.311,3.303],
@@ -31,7 +32,7 @@ const MOCK_DATA: Pack[] = [
   },
   {
     name: "Pack 2", connected: true, valid: true,
-    totalVoltage: 51.9, current: -8.2, soc: 63,
+    totalVoltage: 51.9, current: -8.2, soc: 63, remainingAh: 197.8,
     maxCell: 3.251, minCell: 3.229, deltaCell: 0.022,
     cycles: 98, chargeMos: true, dischargeMos: true, ageMs: 800,
     cells: [3.235,3.229,3.244,3.251,3.238,3.242,3.233,3.249,3.240,3.246,3.231,3.248,3.237,3.243,3.239,3.245],
@@ -98,6 +99,7 @@ export default function Dashboard() {
           <div class="footer-row">
             <span>Min/Max: ${(p.minCell ?? 0).toFixed(3)}V / ${(p.maxCell ?? 0).toFixed(3)}V (&Delta;${(p.deltaCell ?? 0).toFixed(3)}V)</span>
             <span>${tempsHtml}</span>
+            <span>${(p.remainingAh ?? 0).toFixed(1)} Ah</span>
             <span>Cycles: ${p.cycles ?? 0}</span>
             <span class="badge ${p.chargeMos ? 'on':'off'}">CHG ${p.chargeMos ? 'ON':'OFF'}</span>
             <span class="badge ${p.dischargeMos ? 'on':'off'}">DSG ${p.dischargeMos ? 'ON':'OFF'}</span>
