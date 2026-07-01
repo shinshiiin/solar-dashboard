@@ -1,4 +1,4 @@
-export interface Packs {
+export interface Pack {
   name: string;
   connected: boolean;
   valid: boolean;
@@ -18,5 +18,5 @@ export interface Packs {
 }
 
 export interface DataResponse {
-  packs: Packs[];
+  packs: Pack[];
 }
