@@ -107,7 +107,7 @@ export default function Dashboard() {
     }
 
     function poll() {
-      fetch('/api/data')
+      fetch('/api/data', { cache: 'no-store' })
         .then(r => {
           if (!r.ok) throw new Error('bad response');
           return r.json();
