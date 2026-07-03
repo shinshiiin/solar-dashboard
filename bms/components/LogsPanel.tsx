@@ -10,6 +10,7 @@ interface LogEntry {
 export function LogsPanel() {
   const [entries, setEntries] = useState<LogEntry[]>([]);
   const [autoScroll, setAutoScroll] = useState(true);
+  const [isClearing, setIsClearing] = useState(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -36,6 +37,22 @@ export function LogsPanel() {
     };
   }, []);
 
+  async function clearLogs() {
+    setIsClearing(true);
+    try {
+      const res = await fetch('/api/logs', { method: 'DELETE' });
+      if (res.ok) {
+        setEntries([]);
+      } else {
+        console.error('Failed to clear logs');
+      }
+    } catch (err) {
+      console.error('clear log request failed', err);
+    } finally {
+      setIsClearing(false);
+    }
+  }
+
   useEffect(() => {
     if (autoScroll && bottomRef.current) {
       bottomRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -50,15 +67,26 @@ export function LogsPanel() {
           <p className="mt-1 text-sm text-slate-400">Live log output from your BMS device.</p>
         </div>
 
-        <label className="flex items-center gap-3 text-sm text-slate-300">
-          <input
-            type="checkbox"
-            checked={autoScroll}
-            onChange={(e) => setAutoScroll(e.target.checked)}
-            className="h-4 w-4 rounded border-slate-600 bg-slate-900 text-sky-400 focus:ring-sky-400"
-          />
-          Auto-scroll
-        </label>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <label className="flex items-center gap-3 text-sm text-slate-300">
+            <input
+              type="checkbox"
+              checked={autoScroll}
+              onChange={(e) => setAutoScroll(e.target.checked)}
+              className="h-4 w-4 rounded border-slate-600 bg-slate-900 text-sky-400 focus:ring-sky-400"
+            />
+            Auto-scroll
+          </label>
+
+          <button
+            type="button"
+            onClick={clearLogs}
+            disabled={isClearing}
+            className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-800 px-4 py-2 text-sm font-medium text-slate-100 transition hover:border-slate-500 hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {isClearing ? 'Clearing…' : 'Clear logs'}
+          </button>
+        </div>
       </div>
 
       <div className="min-h-[320px] overflow-y-auto rounded-2xl border border-slate-800 bg-slate-900/80 p-4 text-sm leading-6 text-slate-300">
