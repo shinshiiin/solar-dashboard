@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { PackCard } from './components/PackCard';
-import { LogsPanel } from './components/LogsPanel';
 import { MOCK_DATA } from './lib/mock-data';
 import type { DataResponse, Pack } from './lib/types';
 
@@ -34,26 +33,28 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.14),_transparent_35%),linear-gradient(180deg,_#020617,_#0f172a)] px-4 py-8 text-slate-100 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#0f1419] px-4 py-8 text-[#e6edf3] sm:px-6 lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6">
         <header>
-          <h1 className="text-3xl font-semibold tracking-tight">Solar BMS Monitor</h1>
-          <p className="mt-1 text-sm text-slate-400">Live data · refreshes every 2 seconds</p>
+          <h1 className="font-mono text-lg font-semibold tracking-[0.1em] text-[#e6edf3]">
+            DASHBOARD
+          </h1>
+          <p className="mt-1 font-mono text-[11px] tracking-[0.05em] text-[#8b96a3]">
+            live data &middot; refreshes every 2s &middot; tap a card for detail
+          </p>
         </header>
 
         {showFallback ? (
-          <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
-            ⚠ No device found at /api/data — showing mock data for design preview.
+          <div className="rounded-xl border border-[#d29922]/40 bg-[#d29922]/10 px-4 py-3 font-mono text-xs text-[#d29922]">
+            ⚠ no device found at /api/data — showing mock data for design preview
           </div>
         ) : null}
 
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
-          <section className="grid gap-6 xl:grid-cols-2 2xl:grid-cols-3">
-            {packs.map((pack) => (
-              <PackCard key={pack.name} pack={pack} />
-            ))}
-          </section>
-        </div>
+        <section className="grid gap-6 xl:grid-cols-2 2xl:grid-cols-3">
+          {packs.map((pack) => (
+            <PackCard key={pack.name} pack={pack} />
+          ))}
+        </section>
       </div>
     </main>
   );
