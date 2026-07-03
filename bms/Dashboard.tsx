@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { PackCard } from './components/PackCard';
+import { LogsPanel } from './components/LogsPanel';
 import { MOCK_DATA } from './lib/mock-data';
 import type { DataResponse, Pack } from './lib/types';
 
@@ -46,11 +47,15 @@ export default function Dashboard() {
           </div>
         ) : null}
 
-        <section className="grid gap-6 xl:grid-cols-2 2xl:grid-cols-3">
-          {packs.map((pack) => (
-            <PackCard key={pack.name} pack={pack} />
-          ))}
-        </section>
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
+          <section className="grid gap-6 xl:grid-cols-2 2xl:grid-cols-3">
+            {packs.map((pack) => (
+              <PackCard key={pack.name} pack={pack} />
+            ))}
+          </section>
+
+          <LogsPanel />
+        </div>
       </div>
     </main>
   );
