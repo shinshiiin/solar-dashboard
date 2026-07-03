@@ -38,6 +38,11 @@ export async function POST(request) {
   return Response.json({ ok: true });
 }
 
+export async function DELETE() {
+  await redis.del(LOG_KEY);
+  return Response.json({ ok: true });
+}
+
 export async function GET(request) {
   // Lets the viewer page pull recent log entries.
   const { searchParams } = new URL(request.url);
