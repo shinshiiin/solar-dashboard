@@ -53,8 +53,6 @@ export default function Dashboard() {
               <PackCard key={pack.name} pack={pack} />
             ))}
           </section>
-
-          <LogsPanel />
         </div>
       </div>
     </main>
