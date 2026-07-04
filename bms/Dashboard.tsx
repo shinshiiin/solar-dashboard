@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { PackCard } from './components/PackCard';
-import { MOCK_DATA } from './lib/mock-data';
-import type { DataResponse, Pack } from './lib/types';
+import { SrneCard } from './components/SrneCard';
+import { MOCK_DATA, MOCK_SRNE } from './lib/mock-data';
+import type { DataResponse, Pack, SrneReading } from './lib/types';
 
 export default function Dashboard() {
   const [packs, setPacks] = useState<Pack[]>(MOCK_DATA);
+  const [srne, setSrne] = useState<SrneReading | null>(MOCK_SRNE);
   const [showFallback, setShowFallback] = useState(false);
 
   useEffect(() => {
@@ -17,9 +19,11 @@ export default function Dashboard() {
 
         const data: DataResponse = await response.json();
         setPacks(data.packs ?? []);
+        setSrne(data.srne ?? null);
         setShowFallback(false);
       } catch {
         setPacks(MOCK_DATA);
+        setSrne(MOCK_SRNE);
         setShowFallback(true);
       }
     }
@@ -49,6 +53,10 @@ export default function Dashboard() {
             ⚠ no device found at /api/data — showing mock data for design preview
           </div>
         ) : null}
+
+        <section className="grid gap-6 xl:grid-cols-2 2xl:grid-cols-3">
+          <SrneCard srne={srne} />
+        </section>
 
         <section className="grid gap-6 xl:grid-cols-2 2xl:grid-cols-3">
           {packs.map((pack) => (
