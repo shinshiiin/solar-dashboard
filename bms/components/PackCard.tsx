@@ -29,8 +29,9 @@ function averageTemp(temps: number[]): number | null {
 // cycle-based estimate so the card has something to show. Swap this out
 // for a real pack.health value as soon as one is available upstream.
 function estimateHealth(pack: Pack): number {
-  if (typeof (pack as { health?: number }).health === 'number') {
-    return (pack as { health: number }).health;
+  const health = (pack as unknown as { health?: number }).health;
+  if (typeof health === 'number') {
+    return health;
   }
   const cycles = pack.cycles ?? 0;
   return Math.max(0, Math.round(100 - cycles * 0.03));
