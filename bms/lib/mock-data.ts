@@ -1,4 +1,53 @@
-import type { Pack } from './types';
+import type { Pack, SrneReading } from './types';
+
+export const MOCK_SRNE: SrneReading = {
+  valid: true,
+  ageMs: 1200,
+  model: 'MT4830',
+  softwareVersion: 'V03.02.01',
+  hardwareVersion: 'V01.02.03',
+  serialNumber: 251659519,
+  deviceAddress: 1,
+  maxSystemVoltage: 24,
+  ratedChargeCurrent: 30,
+  ratedDischargeCurrent: 30,
+
+  soc: 87,
+  batteryVoltage: 25.4,
+  chargingCurrent: 4.2,
+  controllerTemp: 28,
+  batteryTemp: 25,
+  loadVoltage: 25.3,
+  loadCurrent: 2.0,
+  loadPower: 51,
+  pvVoltage: 34.6,
+  pvCurrent: 3.8,
+  chargingPower: 131,
+  loadOn: true,
+
+  minBattVToday: 23.9,
+  maxBattVToday: 26.1,
+  maxChargeCurrToday: 5.4,
+  maxDischargeCurrToday: 2.6,
+  chargeAhToday: 38,
+  dischargeAhToday: 22,
+  powerGenToday: 990,
+  powerConsToday: 483,
+
+  operatingDays: 8,
+  overDischarges: 1,
+  fullCharges: 6,
+  totalChargeAh: 66051,
+  totalDischargeAh: 264,
+  cumPowerGen: 2000,
+  cumPowerCons: 1000,
+
+  streetLightOn: true,
+  brightness: 100,
+  chargingState: 2,
+  chargingStateName: 'MPPT charging',
+  faultBits: 0,
+};
 
 export const MOCK_DATA: Pack[] = [
   {
