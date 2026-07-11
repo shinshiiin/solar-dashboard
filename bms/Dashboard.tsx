@@ -58,7 +58,7 @@ export default function Dashboard() {
           <SrneCard srne={srne} />
         </section>
 
-        <section className="grid gap-6 xl:grid-cols-2 2xl:grid-cols-3">
+        <section className="grid grid-cols-3 gap-4 xl:grid-cols-2 2xl:grid-cols-3">
           {packs.map((pack) => (
             <PackCard key={pack.name} pack={pack} />
           ))}

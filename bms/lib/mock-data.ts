@@ -3,7 +3,7 @@ import type { Pack, SrneReading } from './types';
 export const MOCK_SRNE: SrneReading = {
   valid: true,
   ageMs: 1200,
-  model: 'MT4830',
+  model: 'MPPT',
   softwareVersion: 'V03.02.01',
   hardwareVersion: 'V01.02.03',
   serialNumber: 251659519,
@@ -51,7 +51,7 @@ export const MOCK_SRNE: SrneReading = {
 
 export const MOCK_DATA: Pack[] = [
   {
-    name: 'Pack 1',
+    name: 'Top Batt',
     connected: true,
     valid: true,
     totalVoltage: 52.8,
@@ -69,7 +69,7 @@ export const MOCK_DATA: Pack[] = [
     temps: [24, 25],
   },
   {
-    name: 'Pack 2',
+    name: 'Middle Batt',
     connected: true,
     valid: true,
     totalVoltage: 51.9,
@@ -86,5 +86,5 @@ export const MOCK_DATA: Pack[] = [
     cells: [3.235, 3.229, 3.244, 3.251, 3.238, 3.242, 3.233, 3.249, 3.24, 3.246, 3.231, 3.248, 3.237, 3.243, 3.239, 3.245],
     temps: [23, 24],
   },
-  { name: 'Pack 3', connected: false, valid: false, cells: [], temps: [] },
+  { name: 'Bottom Batt', connected: false, valid: false, cells: [], temps: [] },
 ];
