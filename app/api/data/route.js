@@ -6,8 +6,8 @@ export const dynamic = 'force-dynamic';
 const redis = Redis.fromEnv();
 
 export async function GET() {
-  const data = await redis.get('latest-reading');
-  const timestamp = await redis.get('latest-timestamp');
+  // const data = await redis.get('latest-reading');
+  // const timestamp = await redis.get('latest-timestamp');
 
   if (!data) {
     return NextResponse.json({ error: 'no data yet' }, { status: 404 });
