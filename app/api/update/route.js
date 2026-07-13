@@ -10,8 +10,9 @@ export async function POST(request) {
   }
 
   const data = await request.json();
-  await redis.set('latest-reading', JSON.stringify(data));
-  await redis.set('latest-timestamp', Date.now());
+
+  // Store data + timestamp together in one key = 1 Redis command instead of 2.
+  await redis.set('latest-reading', JSON.stringify({ payload: data, ts: Date.now() }));
 
   return NextResponse.json({ ok: true });
 }
