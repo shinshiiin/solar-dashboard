@@ -16,6 +16,11 @@ export default function Dashboard() {
     setIsLoading(true);
 
     try {
+      const refresh = await fetch('/api/refresh', { method: 'POST' });
+      if (!refresh.ok) throw new Error('refresh request failed');
+
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       const response = await fetch('/api/data', { cache: 'no-store' });
       if (!response.ok) throw new Error('bad response');
 

@@ -44,34 +44,28 @@ export default function LogsPage() {
   const [entries, setEntries] = useState<LogEntry[]>([]);
   const [autoScroll, setAutoScroll] = useState(true);
   const [lastReceived, setLastReceived] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const consoleRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    let cancelled = false;
+  async function loadLogs() {
+    setIsLoading(true);
+    try {
+      const res = await fetch('/api/logs?count=200');
+      const data = await res.json();
 
-    async function poll() {
-      try {
-        const res = await fetch('/api/logs?count=200');
-        const data = await res.json();
-        if (!cancelled && data.entries) {
-          setEntries(data.entries as LogEntry[]);
-          if (data.entries.length > 0) {
-            setLastReceived(Date.now());
-          }
+      if (data.entries) {
+        setEntries(data.entries as LogEntry[]);
+        if (data.entries.length > 0) {
+          setLastReceived(Date.now());
         }
-      } catch (err) {
-        console.error('log poll failed', err);
       }
+    } catch (err) {
+      console.error('log fetch failed', err);
+    } finally {
+      setIsLoading(false);
     }
-
-    poll();
-    const interval = setInterval(poll, 4000);
-    return () => {
-      cancelled = true;
-      clearInterval(interval);
-    };
-  }, []);
+  }
 
   useEffect(() => {
     if (autoScroll && bottomRef.current) {
@@ -141,7 +135,7 @@ export default function LogsPage() {
             </span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: C.dim }}>
               <span
                 style={{
@@ -155,6 +149,26 @@ export default function LogsPage() {
               />
               {isLive ? 'LIVE' : 'IDLE'}
             </div>
+
+            <button
+              type="button"
+              onClick={loadLogs}
+              disabled={isLoading}
+              style={{
+                borderRadius: '9999px',
+                border: '1px solid #2a3441',
+                background: '#1f2937',
+                color: '#e2e8f0',
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                padding: '8px 12px',
+                cursor: isLoading ? 'not-allowed' : 'pointer',
+                opacity: isLoading ? 0.6 : 1,
+              }}
+            >
+              {isLoading ? 'Loading…' : 'Refresh'}
+            </button>
 
             <label
               style={{
@@ -236,7 +250,7 @@ export default function LogsPage() {
           }}
         >
           <span>{lineCount} lines &middot; {entries.length} batches</span>
-          <span>polling every 4s</span>
+          <span>{isLoading ? 'Fetching logs…' : 'Idle'}</span>
         </div>
       </div>
     </div>
