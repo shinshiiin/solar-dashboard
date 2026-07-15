@@ -199,7 +199,7 @@ export function SrneCard({ srne }: { srne: SrneReading | null }) {
                       </defs>
                       <XAxis dataKey="time" hide />
                       <YAxis domain={[0, 100]} tick={{ fill: '#374151', fontSize: 9 }} tickLine={false} axisLine={false} />
-                      <Tooltip {...TT} formatter={(v: number) => [`${v.toFixed(0)}%`, 'SOC']} />
+                      <Tooltip {...TT} formatter={(v) => [`${Number(v).toFixed(0)}%`, 'SOC']} />
                       <Area type="monotone" dataKey="soc" name="SOC" stroke="#4ade80" strokeWidth={2} fill="url(#socGrad)"
                         dot={{ r: 3, fill: '#4ade80', stroke: '#052e16', strokeWidth: 1.5 }}
                         activeDot={{ r: 5, fill: '#4ade80', stroke: '#0a0f0a', strokeWidth: 2 }} />
