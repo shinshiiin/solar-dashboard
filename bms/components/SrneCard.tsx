@@ -186,7 +186,7 @@ export function SrneCard({ srne }: { srne: SrneReading | null }) {
                   </ResponsiveContainer>
                 </div>
 
-                {/* SOC */}
+                {/* SOC */}   
                 <div>
                   <p className="mb-2 font-mono text-[9px] uppercase tracking-[0.15em] text-slate-700">SOC %</p>
                   <ResponsiveContainer width="100%" height={100}>

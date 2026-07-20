@@ -41,9 +41,6 @@ export function SocRing({
         <span className={`font-bold leading-none ${lg ? 'text-4xl' : 'text-xl'}`} style={{ color }}>
           {soc.toFixed(0)}%
         </span>
-        <span className={`uppercase tracking-widest text-slate-600 leading-none ${lg ? 'text-[10px]' : 'text-[7px]'}`}>
-          {label}
-        </span>
         {centerBottom && (
           <span className={`text-rose-400 leading-none ${lg ? 'text-xs' : 'text-[9px]'}`}>
             {centerBottom}

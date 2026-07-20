@@ -12,7 +12,7 @@ export const MOCK_SRNE: SrneReading = {
   ratedChargeCurrent: 30,
   ratedDischargeCurrent: 30,
 
-  soc: 87,
+  soc: 20,
   batteryVoltage: 25.4,
   chargingCurrent: 4.2,
   controllerTemp: 28,
@@ -45,7 +45,7 @@ export const MOCK_SRNE: SrneReading = {
   streetLightOn: true,
   brightness: 100,
   chargingState: 2,
-  chargingStateName: 'MPPT charging',
+  chargingStateName: 'Charging',
   faultBits: 0,
 };
 

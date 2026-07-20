@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Sidebar from './components/Sidebar';
+import localFont from "next/font/local";
+import Header from './components/Header';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -11,6 +12,22 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const sfPro = localFont({
+  src: [
+    {
+      path: "./fonts/SFPRODISPLAYREGULAR.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/SFPRODISPLAYBOLD.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-sf-pro",
 });
 
 export const metadata: Metadata = {
@@ -26,12 +43,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${sfPro.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <div className="flex min-h-screen flex-col md:flex-row">
-          <Sidebar />
-          <main className="flex-1">{children}</main>
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <main className="">{children}</main>
         </div>
       </body>
     </html>

@@ -6,6 +6,7 @@ import { SrneCard } from './components/SrneCard';
 import { SocRing } from './components/SocRing';
 import { MOCK_DATA, MOCK_SRNE } from './lib/mock-data';
 import type { DataResponse, Pack, SrneReading } from './lib/types';
+import { SrneDashboard } from './components/SrneDashboard';
 
 const POLL_MS = 30_000;
 
@@ -48,34 +49,29 @@ export default function Dashboard() {
       : `data ${Math.round(ageMs / 1000)}s old`;
 
   return (
-    <main className="min-h-screen bg-[#060c06] px-4 py-6 text-slate-100 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6">
+    <main className="relative min-h-screen bg-[url('/images/bg.png')] bg-cover bg-center px-4 py-6 text-slate-100 sm:px-6 lg:px-8">
+      
+      {/* Background Overlay */}
+      <div className="absolute z-0 inset-0 bg-gradient-to-b from-[#18181B] via-[#18181B]/20 to-transparent"></div>
+      
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-2">
 
         {/* Header */}
-        <header className="flex items-end justify-between">
-          <div>
-            <h1 className="font-mono text-sm font-semibold tracking-[0.15em] text-slate-100">DASHBOARD</h1>
-            <p className={`mt-0.5 font-mono text-[9px] tracking-[0.05em] ${isStale ? 'text-amber-400' : 'text-slate-700'}`}>
+        <header className="flex justify-end">
+            <p className={`mt-0.5 font-mono text-[9px] tracking-[0.05em] ${isStale ? 'text-amber-400' : 'text-white'}`}>
               {ageLabel}{lastPolled ? ` · ${lastPolled.toLocaleTimeString()}` : ''}
             </p>
-          </div>
-          <button
-            onClick={() => void fetchData()}
-            className="rounded-lg border border-[#1a2a1a] bg-[#0d140d] px-3 py-1.5 font-mono text-[9px] text-slate-600 hover:border-emerald-500/30 hover:text-emerald-400 transition-colors"
-          >
-            Refresh
-          </button>
         </header>
 
         {/* Fallback */}
-        {showFallback && (
+        {/* {showFallback && (
           <div className="rounded-xl border border-amber-500/25 bg-amber-500/5 px-4 py-2.5 font-mono text-[11px] text-amber-400">
             ⚠ No device data — showing mock data
           </div>
-        )}
+        )} */}
 
         {/* Pack SOC rings */}
-        <section>
+        {/* <section>
           <p className="mb-3 font-mono text-[9px] uppercase tracking-[0.15em] text-slate-700">Battery packs</p>
           <div className="grid grid-cols-3 gap-4">
             {packs.map(pack => (
@@ -98,21 +94,25 @@ export default function Dashboard() {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* SRNE */}
-        <section>
+        {/* <section>
           <p className="mb-3 font-mono text-[9px] uppercase tracking-[0.15em] text-slate-700">Solar controller</p>
           <SrneCard srne={srne} />
+        </section> */}
+
+        <section className="">
+          <SrneDashboard srne={srne} />
         </section>
 
         {/* Pack cards */}
-        <section>
+        {/* <section>
           <p className="mb-3 font-mono text-[9px] uppercase tracking-[0.15em] text-slate-700">Pack detail</p>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {packs.map(pack => <PackCard key={pack.name} pack={pack} />)}
           </div>
-        </section>
+        </section> */}
 
       </div>
     </main>
