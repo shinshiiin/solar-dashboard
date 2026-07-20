@@ -17,12 +17,12 @@ const geistMono = Geist_Mono({
 const sfPro = localFont({
   src: [
     {
-      path: "./fonts/SFPRODISPLAYREGULAR.otf",
+      path: "./fonts/sfprodisplayregular.otf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "./fonts/SFPRODISPLAYBOLD.otf",
+      path: "./fonts/sfprodisplaybold.otf",
       weight: "700",
       style: "normal",
     },
