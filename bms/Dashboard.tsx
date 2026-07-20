@@ -107,12 +107,12 @@ export default function Dashboard() {
         </section>
 
         {/* Pack cards */}
-        {/* <section>
+        <section>
           <p className="mb-3 font-mono text-[9px] uppercase tracking-[0.15em] text-slate-700">Pack detail</p>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {packs.map(pack => <PackCard key={pack.name} pack={pack} />)}
           </div>
-        </section> */}
+        </section>
 
       </div>
     </main>

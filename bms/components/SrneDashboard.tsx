@@ -33,7 +33,7 @@ export function SrneDashboard({ srne }: { srne: SrneReading | null }) {
 
       <div className="">
         <SocRing
-          soc={srne?.soc ?? 'N/A'} size="lg"
+          soc={srne?.soc ?? 0 } size="lg"
           // centerTop={srne?.batteryTemp !== undefined ? `${srne.batteryTemp}°C` : undefined}
           // centerBottom={srne?.chargingCurrent !== undefined ? `${srne?.chargingCurrent.toFixed(1)}Ah` : undefined}
         />
