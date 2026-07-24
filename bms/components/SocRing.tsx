@@ -20,7 +20,7 @@ export function SocRing({
   const gradId = `soc-glow-${size}`;
 
   return (
-    <div className="relative aspect-square w-full p-3">
+    <div className="relative aspect-square w-full">
       <svg
         className="h-full w-full -rotate-90 overflow-visible"
         viewBox="-5 -5 110 110"

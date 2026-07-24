@@ -16,3 +16,21 @@ export function socTextClass(soc: number): string {
   if (soc > 20) return 'text-amber-400';
   return 'text-rose-400';
 }
+
+export function chargingPowerColor(chargingPower: number): string {
+  if (chargingPower > 2000) return '#4ade80';
+  if (chargingPower > 500) return '#fbbf24';
+  return '#f87171';
+}
+
+export function chargingPowerTextClass(chargingPower: number): string {
+  if (chargingPower > 2000) return 'text-emerald-400';
+  if (chargingPower > 500) return 'text-amber-400';
+  return 'text-rose-400';
+}
+
+export function batTempColor(batteryTemp: number): string {
+  if (batteryTemp > 35) return '#f87171'; 
+  if (batteryTemp > 30) return '#fbbf24'; 
+  return '#4ade80';                       
+}
