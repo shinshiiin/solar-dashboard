@@ -1,4 +1,5 @@
 import type { Pack, SrneReading } from './types';
+import type { HistoryPoint } from '../components/Charts';
 
 export const MOCK_SRNE: SrneReading = {
   valid: true,
@@ -13,16 +14,16 @@ export const MOCK_SRNE: SrneReading = {
   ratedDischargeCurrent: 30,
 
   soc: 20,
-  batteryVoltage: 25.4,
-  chargingCurrent: 4.2,
-  controllerTemp: 28,
+  batteryVoltage: 55.2,
+  chargingCurrent: 70.2,
+  controllerTemp: 50,
   batteryTemp: 25,
   loadVoltage: 25.3,
   loadCurrent: 2.0,
   loadPower: 51,
-  pvVoltage: 34.6,
-  pvCurrent: 3.8,
-  chargingPower: 131,
+  pvVoltage: 199.6,
+  pvCurrent: 50.8,
+  chargingPower: 4400,
   loadOn: true,
 
   minBattVToday: 23.9,
@@ -88,3 +89,28 @@ export const MOCK_DATA: Pack[] = [
   },
   { name: 'Bottom Batt', connected: false, valid: false, cells: [], temps: [] },
 ];
+
+
+function genMockHistory(points = 144): HistoryPoint[] {
+  const out: HistoryPoint[] = [];
+  const startHour = 6; // 6am
+  for (let i = 0; i < points; i++) {
+    const progress = i / (points - 1); // 0 → 1 across the day
+    const hourOfDay = startHour + progress * 14; // 6am–8pm
+    const pvCurve = Math.max(0, Math.sin(((hourOfDay - startHour) / 14) * Math.PI));
+
+    const h = Math.floor(hourOfDay);
+    const m = Math.floor((hourOfDay % 1) * 60);
+    const label = new Date(0, 0, 0, h, m).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    out.push({
+      time: label,
+      pvW: Math.round(pvCurve * 4200 + Math.random() * 150),
+      loadW: Math.round(40 + Math.random() * 25),
+      soc: Math.min(100, Math.round(15 + progress * 60 + Math.random() * 2)),
+    });
+  }
+  return out;
+}
+
+export const MOCK_HISTORY: HistoryPoint[] = genMockHistory(60);
