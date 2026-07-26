@@ -4,11 +4,12 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { PackCard } from './components/PackCard';
 import { SrneCard } from './components/SrneCard';
 import { SocRing } from './components/SocRing';
-import { MOCK_DATA, MOCK_SRNE } from './lib/mock-data';
+import { MOCK_DATA, MOCK_SRNE, MOCK_HISTORY } from './lib/mock-data';
 import type { DataResponse, Pack, SrneReading } from './lib/types';
 import { SrneDashboard } from './components/SrneDashboard';
+import { Charts } from './components/Charts';
 
-const POLL_MS = 30_000;
+const POLL_MS = 1_000
 
 export default function Dashboard() {
   const [packs,        setPacks]        = useState<Pack[]>(MOCK_DATA);
@@ -20,7 +21,7 @@ export default function Dashboard() {
 
   const fetchData = useCallback(async () => {
     try {
-      const res = await fetch('/api/data');
+      const res = await fetch('/api/data', { cache: 'no-store' });
       if (!res.ok) throw new Error('bad response');
       const data: DataResponse = await res.json();
       setPacks(data.packs ?? []);
@@ -49,7 +50,7 @@ export default function Dashboard() {
       : `data ${Math.round(ageMs / 1000)}s old`;
 
   return (
-    <main className="relative min-h-screen bg-[url('/images/bg.png')] bg-cover bg-center px-4 py-6 text-slate-100 sm:px-6 lg:px-8">
+    <main className="relative min-h-screen bg-[url('/images/bg.png')] bg-cover bg-center px-4 pb-6 text-slate-100 sm:px-6 lg:px-8">
       
       {/* Background Overlay */}
       <div className="absolute z-0 inset-0 bg-gradient-to-b from-[#18181B] via-[#18181B]/20 to-transparent"></div>
@@ -105,6 +106,12 @@ export default function Dashboard() {
         <section className="">
           <SrneDashboard srne={srne} />
         </section>
+
+        <section className="">
+          <Charts srne={srne} initialHistory={showFallback ? MOCK_HISTORY : undefined} />
+        </section>
+
+
 
         {/* Pack cards */}
         <section>
