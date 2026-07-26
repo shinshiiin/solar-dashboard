@@ -9,7 +9,7 @@ import type { DataResponse, Pack, SrneReading } from './lib/types';
 import { SrneDashboard } from './components/SrneDashboard';
 import { Charts } from './components/Charts';
 
-const POLL_MS = 30_000
+const POLL_MS = 1_000
 
 export default function Dashboard() {
   const [packs,        setPacks]        = useState<Pack[]>(MOCK_DATA);
@@ -21,7 +21,7 @@ export default function Dashboard() {
 
   const fetchData = useCallback(async () => {
     try {
-      const res = await fetch('/api/data');
+      const res = await fetch('/api/data', { cache: 'no-store' });
       if (!res.ok) throw new Error('bad response');
       const data: DataResponse = await res.json();
       setPacks(data.packs ?? []);

@@ -28,7 +28,7 @@ export async function GET() {
     receivedAt: ts,
   });
 
-  response.headers.set('Cache-Control', 's-maxage=5, stale-while-revalidate=5');
+  response.headers.set('Cache-Control', 'no-store');
 
   return response;
 }
