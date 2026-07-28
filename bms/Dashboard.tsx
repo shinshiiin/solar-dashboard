@@ -50,10 +50,7 @@ export default function Dashboard() {
       : `data ${Math.round(ageMs / 1000)}s old`;
 
   return (
-    <main className="relative min-h-screen bg-[url('/images/bg.png')] bg-cover bg-center px-4 pb-6 text-slate-100 sm:px-6 lg:px-8">
-      
-      {/* Background Overlay */}
-      <div className="absolute z-0 inset-0 bg-gradient-to-b from-[#18181B] via-[#18181B]/20 to-transparent"></div>
+    <main className="relative overflow-hidden px-4 pb-6 sm:px-6 lg:px-8">
       
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-2">
 
@@ -104,7 +101,9 @@ export default function Dashboard() {
         </section> */}
 
         <section className="">
-          <SrneDashboard srne={srne} />
+          <SrneDashboard 
+          srne={srne} 
+          />
         </section>
 
         {/* <section className="">
@@ -115,7 +114,6 @@ export default function Dashboard() {
 
         {/* Pack cards */}
         <section>
-          <p className="mb-3 font-mono text-[9px] uppercase tracking-[0.15em] text-slate-700">Pack detail</p>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {packs.map(pack => <PackCard key={pack.name} pack={pack} />)}
           </div>

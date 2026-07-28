@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className="flex justify-between py-3 px-4 lg:py-5 lg:px-30 bg-[#18181B]">
+    <header className="flex justify-between py-3 px-4 lg:py-5 lg:px-30 bg-none">
       <div className="flex gap-2 items-center">
         <svg
           width="18"
