@@ -106,9 +106,9 @@ export default function Dashboard() {
           />
         </section>
 
-        {/* <section className="">
+       <section className="">
           <Charts srne={srne} initialHistory={showFallback ? MOCK_HISTORY : undefined} />
-        </section> */}
+        </section>
 
 
 
