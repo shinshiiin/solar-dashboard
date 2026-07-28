@@ -106,7 +106,6 @@ function genMockHistory(points = 144): HistoryPoint[] {
     out.push({
       time: label,
       pvW: Math.round(pvCurve * 4200 + Math.random() * 150),
-      loadW: Math.round(40 + Math.random() * 25),
       soc: Math.min(100, Math.round(15 + progress * 60 + Math.random() * 2)),
     });
   }

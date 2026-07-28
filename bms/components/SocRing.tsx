@@ -35,10 +35,10 @@ export function SocRing({
         <circle cx="50" cy="50" r={r} fill="none" stroke="#1a2a1a" strokeWidth="8" />
         <circle
           cx="50" cy="50" r={r} fill="none"
-          stroke={color} strokeWidth="8" strokeLinecap="round"
+          stroke="#639922" strokeWidth="8" strokeLinecap="round"
           strokeDasharray={circ} strokeDashoffset={offset}
           style={{
-            filter: `url(#${gradId})`,
+            // filter: `url(#${gradId})`,  <----glow
             transition: 'stroke-dashoffset 0.7s cubic-bezier(0.4,0,0.2,1)',
           }}
         />
@@ -50,7 +50,7 @@ export function SocRing({
             {centerTop}
           </span>
         )}
-        <span className={`font-bold leading-none ${lg ? 'text-2xl' : 'text-xs'}`} style={{ color }}>
+        <span className={`font-bold leading-none ${lg ? 'text-2xl' : 'text-xs'}`}>
           {soc.toFixed(0)}%
         </span>
         {centerBottom && (
