@@ -32,6 +32,19 @@ export function SrneDashboard({ srne }: { srne: SrneReading | null }) {
   const faults        = decodeSrneFaults(srne?.faultBits ?? 0);
   const hasFaults     = faults.length > 0;
 
+  const seededRef = useRef(false);
+
+  useEffect(() => {
+    if (seededRef.current) return;
+    seededRef.current = true;
+    fetch('/api/warnings?count=100')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.entries) setWarningLogs(data.entries);
+      })
+      .catch(() => {});
+  }, []);
+
   useEffect(() => {
     const activeWarnings = decodeSrneFaults(srne?.faultBits ?? 0);
     const previousWarnings = previousWarningsRef.current;
